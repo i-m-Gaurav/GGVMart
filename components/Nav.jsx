@@ -1,11 +1,13 @@
-import React from "react";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Input, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar} from "@nextui-org/react";
-import {AcmeLogo} from "./AcmeLogo.jsx";
-import {SearchIcon} from "./SearchIcon.jsx";
+"use client"
+import React from 'react';
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Input, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar } from "@nextui-org/react";
+import { AcmeLogo } from "./AcmeLogo.jsx";
+import { SearchIcon } from "./SearchIcon.jsx";
 
-export default function App() {
+const Nav = () => {
   return (
-    <Navbar isBordered>
+    <div>
+       <Navbar isBordered>
       <NavbarContent justify="start">
         <NavbarBrand className="mr-4">
           <AcmeLogo />
@@ -73,5 +75,8 @@ export default function App() {
         </Dropdown>
       </NavbarContent>
     </Navbar>
-  );
+    </div>
+  )
 }
+
+export default Nav;
