@@ -3,8 +3,26 @@ import React from 'react';
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Input, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar } from "@nextui-org/react";
 import { AcmeLogo } from "./AcmeLogo.jsx";
 import { SearchIcon } from "./SearchIcon.jsx";
+import { UserAuth } from "@/app/context/AuthContext"
+
 
 const Nav = () => {
+  const {user, googleSignIn, logOut} = UserAuth();
+  const handleSignIn = async () => {
+    try {
+      await googleSignIn()
+    } catch(error){
+      console.log(error)
+    }
+  }
+
+    const handleLogOut = async () => {
+      try {
+        await logOut()
+      } catch(error){
+        console.log(error)
+      }
+    }  
   return (
     <div>
        <Navbar isBordered>
@@ -45,7 +63,7 @@ const Nav = () => {
           startContent={<SearchIcon size={18} />}
           type="search"
         />
-        <Dropdown placement="bottom-end">
+        {!user ? (<button onClick={handleSignIn}>Login</button>) : ( <Dropdown placement="bottom-end">
           <DropdownTrigger>
             <Avatar
               isBordered
@@ -68,15 +86,15 @@ const Nav = () => {
             <DropdownItem key="system">System</DropdownItem>
             <DropdownItem key="configurations">Configurations</DropdownItem>
             <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
-            <DropdownItem key="logout" color="danger">
+            <DropdownItem onClick={handleLogOut} key="logout" color="danger">
               Log Out
             </DropdownItem>
           </DropdownMenu>
-        </Dropdown>
+        </Dropdown>)}
       </NavbarContent>
     </Navbar>
     </div>
-  )
+  ) 
 }
 
 export default Nav;
